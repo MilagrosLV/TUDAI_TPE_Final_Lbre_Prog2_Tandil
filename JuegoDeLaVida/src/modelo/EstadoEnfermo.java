@@ -4,20 +4,20 @@ public class EstadoEnfermo implements Estado {
 
 	@Override
 	public boolean isViva() {
-		// TODO Auto-generated method stub
-		return false;
+		//Viva = true
+		return true;
 	}
 
 	@Override
 	public char getRepresentacion() {
-		// TODO Auto-generated method stub
-		return 0;
+		//Se representa con la E mayuscula, por Enfermedad
+		return 'E';
 	}
 
 	@Override
 	public Estado SigEstado(int vecinosVivos) {
-		// TODO Auto-generated method stub
-		return null;
+		//Regla: Una celda enferma, en la suguiente generación morirá
+		return new EstadoMuerto();
 	}
 
 }
