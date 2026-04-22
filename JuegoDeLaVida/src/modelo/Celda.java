@@ -1,4 +1,5 @@
 package modelo;
+import modelo.Estado;
 
 public class Celda {
 	//La Celda va a com¿nocer su posición y su Estado actuasl, también pregunta su Estado Siguiente.
@@ -16,12 +17,11 @@ public class Celda {
 		return estadoSig;
 	}
 
-	//METODOS 
+	//METODOS Estado
 	public void calcularSig(int vecinosVivos) {
 		//Se delega el comportamiento a Estado, para saber cuál será su siguiente estado.
 		this.estadoSig = getEstadoActual().SigEstado(vecinosVivos);
 	}
-	
 	public boolean isViva() {
 		//Buscar si está viva la Celda
 		return this.estadoActual.isViva();
