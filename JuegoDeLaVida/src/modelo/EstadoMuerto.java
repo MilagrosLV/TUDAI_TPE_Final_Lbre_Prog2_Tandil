@@ -2,9 +2,11 @@ package modelo;
 
 public class EstadoMuerto implements Estado {
 
+	/** Número exacto de vecinos necesario para reproducirse */
+	private final int VECINOS_PARA_REPRODUCIR = 3;
+
 	@Override
 	public boolean isViva() {
-		// Muerta = false
 		return false;
 	}
 
@@ -16,12 +18,13 @@ public class EstadoMuerto implements Estado {
 
 	@Override
 	public Estado SigEstado(int vecinosVivos) {
-		// Regla: Reproducción - Una celda Muerta con exactamente 3 vecinos vivos se convierte en viva
-		if (vecinosVivos == 3) {
+		// Regla: reproducción - nace con exactamente 3 vecinos vivos
+		if(vecinosVivos == VECINOS_PARA_REPRODUCIR) {
 			return new EstadoVivo();
 		}
-		// En cualquier otro caso, la celda muerta permanece muerta
+		// En cualquier otro caso, permanece muerta
 		return this;
 	}
-
 }
+
+

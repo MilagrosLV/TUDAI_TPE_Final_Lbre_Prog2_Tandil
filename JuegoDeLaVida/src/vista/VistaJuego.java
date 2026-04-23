@@ -1,9 +1,10 @@
 package vista;
-import java.util.Scanner;
-
 import io.CargadorTablero;
+import java.util.Scanner;
 import modelo.Celda;
 import modelo.Estado;
+import modelo.EstadoEnfermo;
+import modelo.EstadoLatente;
 import modelo.EstadoMuerto;
 import modelo.EstadoVivo;
 import modelo.Tablero;
@@ -58,7 +59,7 @@ public class VistaJuego {
 	
 	
 	private void configurarArchivo() throws Exception {
-        System.out.print("Ingrese la ruta del archivo (ej: ejemplos/semilla1.txt): ");
+        System.out.print("Ingrese la ruta del archivo (ej: ejemplos/ejemplo1.txt): ");
         String ruta = scanner.next();
         this.tablero = CargadorTablero.cargarDesdeArchivo(ruta);
     }
@@ -74,13 +75,18 @@ public class VistaJuego {
         // Poblado aleatorio
         for (int i = 0; i < f; i++) {
             for (int j = 0; j < c; j++) {
-            	// 30% vivos, 70% muertos
-            	Estado inicial; 
-            	if (Math.random() > 0.7) {
+            	// Distribución: 25% Vivo, 25% Muerto, 25% Enfermo, 25% Latente
+            	Estado inicial;
+            	double random = Math.random();
+            	if (random < 0.25) {
             	    inicial = new EstadoVivo();
-            	} else {
+            	} else if (random < 0.50) {
             	    inicial = new EstadoMuerto();
-            	}                
+            	} else if (random < 0.75) {
+            	    inicial = new EstadoEnfermo();
+            	} else {
+            	    inicial = new EstadoLatente();
+            	}
             	Celda cInicial = new Celda(inicial);
                 tablero.setCelda(i, j, cInicial);
             }

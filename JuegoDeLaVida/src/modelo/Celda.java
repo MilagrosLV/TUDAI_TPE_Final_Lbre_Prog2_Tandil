@@ -1,5 +1,4 @@
 package modelo;
-import modelo.Estado;
 
 public class Celda {
 	//La Celda va a com¿nocer su posición y su Estado actuasl, también pregunta su Estado Siguiente.
