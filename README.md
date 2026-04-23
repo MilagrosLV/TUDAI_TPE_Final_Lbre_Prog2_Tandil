@@ -6,6 +6,12 @@
 
 
 
+
+
+## ¿Cómo ejecutar el programa?
+
+
+
 ### Crear un nuevo Estado de Celda
 
 Para extender el juego con nuevas reglas, el sistema utiliza el Patrón State:
