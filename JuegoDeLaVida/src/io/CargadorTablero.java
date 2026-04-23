@@ -48,10 +48,11 @@ public class CargadorTablero {
 
     private static Estado crearEstadoSegunCaracter(char c) {
         return switch (Character.toUpperCase(c)) {
-            case 'X', 'O' -> new EstadoVivo();   // X u O para vivo
-            case 'E'      -> new EstadoEnfermo(); // Nuevo estado
-            case 'L'      -> new EstadoLatente(); // Nuevo estado
-            default       -> new EstadoMuerto();  // '.' o cualquier otro
+            case 'O'	-> new EstadoVivo();   // O para vivo
+            case 'E'    -> new EstadoEnfermo(); // Nuevo estado
+            case 'X'    -> new EstadoLatente(); // Nuevo estado
+            case '.'	-> new EstadoMuerto();
+            default       -> new EstadoMuerto();  // cualquier otro
         };
     }
 }
