@@ -12,6 +12,8 @@ import modelo.EstadoMuerto;
 import modelo.EstadoVivo;
 import modelo.Tablero;
 
+
+//INPUTS / OUTPUTS
 public class CargadorTablero {
 	
 	//Leer archivo .txt y cargar tablero

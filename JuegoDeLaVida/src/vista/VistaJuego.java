@@ -90,7 +90,7 @@ public class VistaJuego {
 	private void bucleDeEjecucion() throws InterruptedException {
         System.out.print("¿Cuántas generaciones ejecutar? (0 para indefinido): ");
         int maxGen = leerEntero();
-        System.out.print("Intervalo entre pasos (ms): ");
+        System.out.print("Intervalo entre pasos (1s=1000ms): ");
         int delay = leerEntero();
 
         int generacion = 0;
