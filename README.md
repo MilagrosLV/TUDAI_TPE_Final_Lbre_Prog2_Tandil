@@ -394,12 +394,6 @@ private static Estado crearEstadoSegunCaracter(char c) {
 
 ---
 
-## Autores y Licencia
-
-Proyecto desarrollado para **TUDAI - Programación II** - Tandil
-
----
-
 ## Preguntas Frecuentes
 
 **P: ¿Cómo agrego un nuevo estado personalizado?**
@@ -407,9 +401,6 @@ A: Crea una clase que implemente `Estado` y actualiza `CargadorTablero.crearEsta
 
 **P: ¿Puedo cambiar las reglas**
 A: Sí, modifica los métodos `SigEstado()` en las clases de estado. Otros componentes no se ven afectados.
-
-**P: ¿Funciona en tableros de 1000x1000?**
-A: Sí, pero dependerá del hardware. La velocidad es lineal con el tamaño.
 
 **P: ¿Qué pasa si un archivo tiene filas de diferente longitud?**
 A: Se completa con células muertas (`.`) automáticamente.
