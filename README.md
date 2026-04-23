@@ -372,25 +372,12 @@ private static Estado crearEstadoSegunCaracter(char c) {
 
 ---
 
-
 ## Notas Técnicas
 
 ### Patrones de Diseño Utilizados
 - **State Pattern** (Patrón Estado): `Celda` + `Estado` para transiciones
 - **Template Method**: Flujo de ejecución en `VistaJuego`
 - **Factory Pattern**: Creación de estados en `CargadorTablero`
-
-### Características de Java Utilizadas
-- **Interfaces**: Definición de contratos (`Estado`)
-- **Switch Expression** (Java 14+): Mapeo elegante en `crearEstadoSegunCaracter()`
-- **Try-with-resources**: Manejo automático de Scanner
-- **Herencia e Implementación**: Polimorfismo en `Estado`
-
-### Complejidad Computacional
-- **Por generación**: O(f × c) donde f=filas, c=columnas
-- **Conteo de vecinos**: O(1) constante (máximo 8 vecinos)
-- **Memoria**: O(f × c) para matriz de celdas
-- **Escalabilidad**: Lineal con tamaño del tablero
 
 ---
 
