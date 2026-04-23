@@ -26,18 +26,27 @@ public class VistaJuego {
 	//Luego se procede
 	public void iniciar() {
 		System.out.println("=== BIENVENIDO AL JUEGO DE LA VIDA ===");
-		System.out.println("1. Cargar estado inicial desde archivo");
-        System.out.println("2. Generar tablero aleatorio");
-        System.out.print("Seleccione una opción: ");
-        
-        int opcion = leerEntero();
+		
+	    int opcion = 0;
+	    // Bucle para validar que elijan 1 o 2
+	    while (opcion != 1 && opcion != 2) {
+	        System.out.println("1. Cargar estado inicial desde archivo");
+	        System.out.println("2. Generar tablero aleatorio");
+	        System.out.print("Seleccione una opción (1 o 2): ");
+	        
+	        opcion = leerEntero();
+	        
+	        if (opcion != 1 && opcion != 2) {
+	            System.err.println("Error: Opción inválida. Intente de nuevo.");
+	        }
+	    }
         
         try {
             if (opcion == 1) {
                 configurarArchivo();
             } else {
                 configurarManual();
-            }
+            } 
             
             if (tablero != null) {
                 bucleDeEjecucion();
