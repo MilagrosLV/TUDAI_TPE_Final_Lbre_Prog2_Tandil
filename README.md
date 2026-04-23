@@ -202,13 +202,11 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
 #### 4. **Implementaciones de Estado**
 
 **EstadoVivo.java**
-- Reglas:
 - Muere si tiene < 2 o > 3 vecinos vivos
 - Probabilidad de enfermarse: 25%
 - Representación: `O`
 
 **EstadoMuerto.java**
-- Reglas:
 - Se vuelve viva con exactamente 3 vecinos vivos (reproducción)
 - Permanece muerta en cualquier otro caso
 - Representación: `.`
@@ -378,19 +376,6 @@ private static Estado crearEstadoSegunCaracter(char c) {
 - **State Pattern** (Patrón Estado): `Celda` + `Estado` para transiciones
 - **Template Method**: Flujo de ejecución en `VistaJuego`
 - **Factory Pattern**: Creación de estados en `CargadorTablero`
-
----
-
-## Preguntas Frecuentes
-
-**P: ¿Cómo agrego un nuevo estado personalizado?**
-A: Crea una clase que implemente `Estado` y actualiza `CargadorTablero.crearEstadoSegunCaracter()`.
-
-**P: ¿Puedo cambiar las reglas**
-A: Sí, modifica los métodos `SigEstado()` en las clases de estado. Otros componentes no se ven afectados.
-
-**P: ¿Qué pasa si un archivo tiene filas de diferente longitud?**
-A: Se completa con células muertas (`.`) automáticamente.
 
 ---
 
