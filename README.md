@@ -23,12 +23,12 @@ JuegoDeLaVida/
 │   │   └── JuegoDeLaVida.java    # Punto de entrada de la aplicación
 │   ├── modelo/
 │   │   ├── Tablero.java          # Lógica del tablero de juego
-│   │   ├── Celda.java            # Representación de una célula
+│   │   ├── Celda.java            # Representación de una celda
 │   │   ├── Estado.java           # Interfaz para patrones de estado
-│   │   ├── EstadoVivo.java       # Implementación: célula viva
-│   │   ├── EstadoMuerto.java     # Implementación: célula muerta
-│   │   ├── EstadoEnfermo.java    # Implementación: célula enferma
-│   │   └── EstadoLatente.java    # Implementación: célula latente
+│   │   ├── EstadoVivo.java       # Implementación: celda viva
+│   │   ├── EstadoMuerto.java     # Implementación: celda muerta
+│   │   ├── EstadoEnfermo.java    # Implementación: celda enferma
+│   │   └── EstadoLatente.java    # Implementación: celda latente
 │   ├── vista/
 │   │   └── VistaJuego.java       # Interfaz CLI del usuario
 │   └── io/
@@ -101,13 +101,13 @@ O.E.O
 ```
 
 Caracteres válidos:
-- `O` - Célula viva
-- `.` - Célula muerta
-- `E` - Célula enferma
-- `X` - Célula latente
+- `O` - celda viva
+- `.` - celda muerta
+- `E` - celda enferma
+- `X` - celda latente
 
 
-- **Nota sobre el Formato**: El programa es insensible a mayúsculas/minúsculas al leer archivos, y cualquier carácter no reconocido será tratado automáticamente como una célula muerta '.'.
+- **Nota sobre el Formato**: El programa es insensible a mayúsculas/minúsculas al leer archivos, y cualquier carácter no reconocido será tratado automáticamente como una celda muerta '.'.
 
 
 #### 2. **Generación Aleatoria**
@@ -115,7 +115,7 @@ Caracteres válidos:
 Ingrese filas: 10
 Ingrese columnas: 15
 ```
-Genera un tablero aleatorio con 30% de células vivas.
+Genera un tablero aleatorio con 30% de celdas vivas.
 
 ### Controles Durante la Simulación
 
@@ -168,9 +168,9 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
 - **Responsabilidad**: Gestionar el estado global del tablero y la evolución de generaciones
 - **Métodos clave**:
   - `avanzarGeneracion()`: Calcula la siguiente generación
-  - `contarVecinosVivos(int fila, int col)`: Cuenta células vivas adyacentes
+  - `contarVecinosVivos(int fila, int col)`: Cuenta celdas vivas adyacentes
   - `mostrar()`: Imprime el tablero
-  - `setCelda()` / `getCelda()`: Acceso a células específicas
+  - `setCelda()` / `getCelda()`: Acceso a celdas específicas
 
 **Lógica de evolución**:
 ```java
@@ -182,18 +182,18 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
 ```
 
 #### 2. **Celda.java** - Unidad Atómica
-- **Responsabilidad**: Representar una célula individual y su evolución
+- **Responsabilidad**: Representar una celda individual y su evolución
 - **Métodos clave**:
   - `calcularSig(int vecinosVivos)`: Delega a Estado para calcular siguiente
   - `evolucionar()`: Transiciona al siguiente estado
-  - `isViva()`: Consulta si la célula está viva
+  - `isViva()`: Consulta si la celda está viva
 
 **Patrón**: Actúa como contexto en el patrón State
 
 #### 3. **Estado.java (Interfaz)** - Patrón Strategy
 - **Responsabilidad**: Definir el contrato para comportamientos de estado
 - **Métodos**:
-  - `boolean isViva()`: ¿Es una célula viva?
+  - `boolean isViva()`: ¿Es una celda viva?
   - `char getRepresentacion()`: Símbolo visual
   - `Estado SigEstado(int vecinosVivos)`: Calcula transición
 
@@ -258,7 +258,7 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
 ### 1. **Single Responsibility Principle (SRP)**
 Cada clase tiene una única responsabilidad bien definida:
 - `Tablero` → Gestión del tablero y evolución
-- `Celda` → Representación de célula y delegación
+- `Celda` → Representación de celda y delegación
 - `Estado` → Comportamiento específico del estado
 - `VistaJuego` → Presentación e interacción
 - `CargadorTablero` → Entrada/Salida
