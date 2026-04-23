@@ -1,19 +1,8 @@
-# Juego de la Vida - Implementación en Java
-
+# Juego de la Vida - TPE Final Libre - Programacion 2 TUDAI - Tandil
 ## Descripción del Proyecto
+Este proyecto se crea a partir de la consigna del TPE Libre - Juego de la vida (2026).pdf.
 
-Este proyecto es una implementación educativa del **Juego de la Vida de Conway** en Java, un autómata celular que simula la evolución de una población de células basada en reglas deterministas. El proyecto incluye extensiones adicionales con estados personalizados (células enfermas y latentes) para demostrar la flexibilidad del diseño.
-
-### Características Principales
-- ✅ Carga de estados iniciales desde archivo o generación aleatoria
-- ✅ Soporte para múltiples estados de célula (Vivo, Muerto, Enfermo, Latente)
-- ✅ Interfaz de línea de comandos interactiva
-- ✅ Arquitectura extensible basada en SOLID
-- ✅ Manejo robusto de errores
-
----
-
-## Tabla de Contenidos
+## Índice
 1. [Estructura del Proyecto](#estructura-del-proyecto)
 2. [Requisitos](#requisitos)
 3. [Compilación](#compilación)
@@ -51,6 +40,8 @@ JuegoDeLaVida/
 └── ejemplos/                     # Archivos de configuración de ejemplo
     ├── ejemplo1.txt
     └── ejemplo2.txt
+    └── ejemplo3.txt
+
 ```
 
 ---
