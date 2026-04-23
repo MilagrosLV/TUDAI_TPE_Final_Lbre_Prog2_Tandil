@@ -9,10 +9,7 @@ Este proyecto se crea a partir de la consigna del TPE Libre - Juego de la vida (
 4. [Ejecución](#ejecución)
 5. [Arquitectura y Diseño](#arquitectura-y-diseño)
 6. [Principios SOLID](#principios-solid-aplicados)
-7. [Manejo de Errores](#manejo-de-errores)
-8. [Cómo Extender el Proyecto](#cómo-extender-el-proyecto)
-9. [Reglas del Juego](#reglas-del-juego)
-10. [Troubleshooting](#troubleshooting)
+7. [Cómo Extender el Proyecto](#cómo-extender-el-proyecto)
 
 ---
 
@@ -317,55 +314,6 @@ private EstadoVivo estadoActual;  // Depende de implementación
 
 ---
 
-## Manejo de Errores
-
-El proyecto implementa un manejo robusto de errores en múltiples niveles:
-
-### 1. **Validación de Entrada del Usuario**
-```java
-// VistaJuego.java
-private int leerEntero() {
-    while (!scanner.hasNextInt()) {
-        System.out.print("Por favor, ingrese un número válido: ");
-        scanner.next();
-    }
-    return scanner.nextInt();
-}
-```
-**Evita**: Excepciones por entrada no numérica
-
-### 2. **Validación de Archivos**
-```java
-// CargadorTablero.java
-if (!sc.hasNextInt()) {
-    throw new Exception("Formato inválido: falta número de filas");
-}
-```
-**Evita**: Archivos malformados silenciosos
-
-### 3. **Validación de Posiciones**
-```java
-// Tablero.java
-private boolean isPosValida(int nf, int nc) {
-    return nf>=0 && nf<getFilas() && nc>=0 && nc<getColumnas();
-}
-```
-**Evita**: Acceso a índices fuera de rango
-
-### 4. **Captura y Reporte de Excepciones**
-```java
-try {
-    this.tablero = CargadorTablero.cargarDesdeArchivo(ruta);
-} catch (FileNotFoundException e) {
-    System.err.println("Error: Archivo no encontrado");
-} catch (Exception e) {
-    System.err.println("Error: " + e.getMessage());
-}
-```
-**Ventaja**: Mensaje claro al usuario
-
----
-
 ## Cómo Extender el Proyecto
 
 ### Escenario 1: Agregar un Nuevo Estado
@@ -429,7 +377,6 @@ private static Estado crearEstadoSegunCaracter(char c) {
 
 ### Patrones de Diseño Utilizados
 - **State Pattern** (Patrón Estado): `Celda` + `Estado` para transiciones
-- **Strategy Pattern**: Múltiples estrategias de comportamiento
 - **Template Method**: Flujo de ejecución en `VistaJuego`
 - **Factory Pattern**: Creación de estados en `CargadorTablero`
 
