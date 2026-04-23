@@ -109,6 +109,10 @@ Caracteres válidos:
 - `E` - Célula enferma
 - `X` - Célula latente
 
+
+- **Nota sobre el Formato**: El programa es insensible a mayúsculas/minúsculas al leer archivos, y cualquier carácter no reconocido será tratado automáticamente como una célula muerta '.'.
+
+
 #### 2. **Generación Aleatoria**
 ```
 Ingrese filas: 10
@@ -201,14 +205,15 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
 #### 4. **Implementaciones de Estado**
 
 **EstadoVivo.java**
-- Reglas de Conway clásicas
+- Reglas:
 - Muere si tiene < 2 o > 3 vecinos vivos
 - Probabilidad de enfermarse: 25%
 - Representación: `O`
 
 **EstadoMuerto.java**
-- Permanece muerto (célula neutra)
-- Nunca cambia de estado (estable)
+- Reglas:
+- Se vuelve viva con exactamente 3 vecinos vivos (reproducción)
+- Permanece muerta en cualquier otro caso
 - Representación: `.`
 
 **EstadoEnfermo.java**
@@ -547,15 +552,15 @@ Ingrese la ruta del archivo (ej: ejemplos/ejemplo1.txt): ejemplos/ejemplo1.txt
 
 ## Reglas del Juego
 
-### Estados Estándar (Variante de Conway)
+### Estados Estándar 
 - **Célula Viva** (O):
   - Muere si tiene < 2 o > 3 vecinos vivos (soledad o sobrepoblación)
   - Sobrevive con 2 o 3 vecinos
   - Puede enfermar con 25% de probabilidad por generación
 
 - **Célula Muerta** (.):
-  - Permanece muerta (nunca nace)
-  - Estado estable y pasivo
+  - Se vuelve viva con exactamente 3 vecinos vivos (reproducción)
+  - Permanece muerta en cualquier otro caso
 
 ### Estados Extendidos (Variante del Proyecto)
 - **Célula Enferma** (E):
@@ -645,7 +650,7 @@ Proyecto desarrollado para **TUDAI - Programación II** - Tandil
 **P: ¿Cómo agrego un nuevo estado personalizado?**
 A: Crea una clase que implemente `Estado` y actualiza `CargadorTablero.crearEstadoSegunCaracter()`.
 
-**P: ¿Puedo cambiar las reglas de Conway?**
+**P: ¿Puedo cambiar las reglas**
 A: Sí, modifica los métodos `SigEstado()` en las clases de estado. Otros componentes no se ven afectados.
 
 **P: ¿Funciona en tableros de 1000x1000?**

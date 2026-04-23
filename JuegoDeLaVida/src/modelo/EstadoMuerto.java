@@ -16,7 +16,11 @@ public class EstadoMuerto implements Estado {
 
 	@Override
 	public Estado SigEstado(int vecinosVivos) {
-		//Regla: Sobrepoblación, con más de 3 vecinos vivos, muere.
+		// Regla: Reproducción - Una celda Muerta con exactamente 3 vecinos vivos se convierte en viva
+		if (vecinosVivos == 3) {
+			return new EstadoVivo();
+		}
+		// En cualquier otro caso, la celda muerta permanece muerta
 		return this;
 	}
 
