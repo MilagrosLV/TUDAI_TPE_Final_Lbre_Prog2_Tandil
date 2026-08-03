@@ -44,30 +44,14 @@ JuegoDeLaVida/
 
 ---
 
-## Requisitos
-
-- **Java**: JDK 11 o superior
-- **Sistema Operativo**: Windows, macOS, Linux
-- **Compilador**: `javac` (incluido en JDK)
-
----
-
 ## Compilación
 
-### Opción 1: Compilación Manual desde Línea de Comandos
+### Desde Línea de Comandos
 
 ```bash
 cd JuegoDeLaVida
 javac -d bin src/modelo/*.java src/juego/*.java src/vista/*.java src/io/*.java
 ```
-
-### Opción 2: Usando IDE (IntelliJ IDEA, Eclipse, etc.)
-
-1. Abre el proyecto en tu IDE
-2. Marca la carpeta `src` como source folder
-3. Ejecuta la opción "Build Project"
-
----
 
 ## Ejecución
 
@@ -312,10 +296,10 @@ private Estado estadoActual;  // Depende de abstracción
 
 ### Escenario 1: Agregar un Nuevo Estado
 
-Supongamos que quieres agregar un estado `EstadoRoboto` que:
+Supongamos que se quiere agregar un estado `EstadoRoboto`:
 - Es considerado "vivo"
 - Se representa con `R`
-- Muere si tiene más de 4 vecinos vivos (resiste mejor que vivo)
+- Muere si tiene más de 4 vecinos vivos.
 
 #### Paso 1: Crear la Nueva Clase de Estado
 
