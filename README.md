@@ -18,7 +18,7 @@ Este proyecto se crea a partir de la consigna del TPE Libre - Juego de la vida (
 ```
 JuegoDeLaVida/
 ├── src/
-│   ├── module-info.java          # Configuración del módulo
+│   ├── module-info.java.bak      # Backup de la configuración del módulo
 │   ├── juego/
 │   │   └── JuegoDeLaVida.java    # Punto de entrada de la aplicación
 │   ├── modelo/
@@ -30,14 +30,15 @@ JuegoDeLaVida/
 │   │   ├── EstadoEnfermo.java    # Implementación: celda enferma
 │   │   └── EstadoLatente.java    # Implementación: celda latente
 │   ├── vista/
-│   │   └── VistaJuego.java       # Interfaz CLI del usuario
+│   │   └── VistaJuego.java       # Interfaz gráfica Swing del usuario
 │   └── io/
 │       └── CargadorTablero.java  # Carga estados desde archivo
 ├── bin/                          # Archivos compilados (.class)
 └── ejemplos/                     # Archivos de configuración de ejemplo
     ├── ejemplo1.txt
-    └── ejemplo2.txt
-    └── ejemplo3.txt
+    ├── ejemplo2.txt
+    ├── ejemplo3.txt
+    └── ejemplo4.txt
 
 ```
 
@@ -57,7 +58,7 @@ JuegoDeLaVida/
 
 ```bash
 cd JuegoDeLaVida
-javac -d bin src/modelo/*.java src/juego/*.java src/vista/*.java src/io/*.java src/module-info.java
+javac -d bin src/modelo/*.java src/juego/*.java src/vista/*.java src/io/*.java
 ```
 
 ### Opción 2: Usando IDE (IntelliJ IDEA, Eclipse, etc.)
@@ -82,15 +83,20 @@ java -cp bin juego.JuegoDeLaVida
 1. Abre el archivo `JuegoDeLaVida.java`
 2. Ejecuta el método `main()` (botón de play o tecla F5)
 
-### Opciones de Ejecución
+### Interfaz de Ejecución Actual
 
-Al iniciar, el programa ofrece dos modalidades:
+La versión presente en el proyecto usa una interfaz Swing. Los controles disponibles son:
 
-#### 1. **Cargar desde Archivo**
-```
-Ingrese la ruta del archivo (ej: ejemplos/ejemplo1.txt):
-```
+- **Cargar desde archivo**: abre un `JFileChooser` para elegir un tablero desde `ejemplos/` o cualquier archivo `.txt`.
+- **Generar aleatorio**: crea un tablero con tamaños definidos por los campos `Filas` y `Columnas`.
+- **Iniciar simulación**: arranca el bucle con `Timer` y el `delay` configurado en milisegundos.
+- **Siguiente paso**: avanza una única generación manualmente.
+- **Pausar / Reanudar**: controla la ejecución automática.
+
+### Formato de Archivo Soportado
+
 El archivo debe tener el siguiente formato:
+
 ```
 <filas> <columnas>
 O.X.O
@@ -106,26 +112,20 @@ Caracteres válidos:
 - `E` - celda enferma
 - `X` - celda latente
 
-
-- **Nota sobre el Formato**: El programa es insensible a mayúsculas/minúsculas al leer archivos, y cualquier carácter no reconocido será tratado automáticamente como una celda muerta '.'.
-
-
-#### 2. **Generación Aleatoria**
-```
-Ingrese filas: 10
-Ingrese columnas: 15
-```
-Genera un tablero aleatorio con 30% de celdas vivas.
+- **Nota sobre el Formato**: El programa es insensible a mayúsculas/minúsculas al leer archivos, y cualquier carácter no reconocido será tratado automáticamente como una celda muerta `.`.
 
 ### Controles Durante la Simulación
 
-```
-¿Cuántas generaciones ejecutar? (0 para indefinido): 50
-Intervalo entre pasos (1s=1000ms): 500
-```
+Los campos de configuración visibles en la interfaz son:
 
-- `0 generaciones` = ejecuta indefinidamente hasta estabilización
-- `Intervalo en ms` = velocidad de la simulación
+- `Filas`
+- `Columnas`
+- `Generaciones`
+- `Delay (ms)`
+
+Comportamiento actual:
+- `0 generaciones` = la simulación se ejecuta hasta que el tablero se estabiliza o no hay cambios.
+- `Delay` = velocidad de la animación en milisegundos.
 
 ---
 
@@ -133,20 +133,20 @@ Intervalo entre pasos (1s=1000ms): 500
 
 ### Separación Modelo-Vista
 
-El proyecto implementa una arquitectura limpia que separa claramente la lógica del juego de su presentación:
+El proyecto implementa una arquitectura limpia que separa la lógica del juego de su presentación gráfica:
 
 ```
 ┌─────────────────────────────────────────────────┐
-│           CAPA DE PRESENTACIÓN (CLI)           │
+│               VISTA                            │
 │              VistaJuego.java                   │
-│  - Interfaz de usuario                         │
-│  - Lectura de entrada                          │
-│  - Coordinación del flujo                      │
+│  - Interfaz gráfica con JFrame                 │
+│  - Botones de carga, aleatoriedad y control    │
+│  - Render del tablero y manejo de Timer        │
 └────────────────┬────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────┐
-│         CAPA DE APLICACIÓN                     │
+│                   IO                           │
 │         CargadorTablero.java                   │
 │  - Parseo de archivos                          │
 │  - Manejo de I/O                               │
@@ -154,7 +154,7 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
                  │
                  ▼
 ┌─────────────────────────────────────────────────┐
-│         CAPA DE MODELO (Lógica Pura)          │
+│           MODELO                               │
 │      Tablero, Celda, Estado                    │
 │  - Algoritmo del juego                         │
 │  - Cálculo de generaciones                     │
@@ -165,91 +165,91 @@ El proyecto implementa una arquitectura limpia que separa claramente la lógica 
 ### Clases Principales y Responsabilidades
 
 #### 1. **Tablero.java** - Orquestación del Juego
-- **Responsabilidad**: Gestionar el estado global del tablero y la evolución de generaciones
+- **Responsabilidad**: Gestionar el estado global del tablero y la evolución de generaciones.
 - **Métodos clave**:
-  - `avanzarGeneracion()`: Calcula la siguiente generación
-  - `contarVecinosVivos(int fila, int col)`: Cuenta celdas vivas adyacentes
-  - `mostrar()`: Imprime el tablero
-  - `setCelda()` / `getCelda()`: Acceso a celdas específicas
+  - `avanzarGeneracion()`: Calcula la siguiente generación y devuelve si hubo cambios.
+  - `contarVecinosVivos(int fila, int col)`: Cuenta celdas vivas adyacentes.
+  - `mostrar()`: Imprime el tablero en consola.
+  - `setCelda()` / `getCelda()`: Acceso a celdas específicas.
 
 **Lógica de evolución**:
 ```java
 // Para cada celda:
 // 1. Contar vecinos vivos
 // 2. Calcular siguiente estado (delegado a Estado)
-// 3. Aplicar cambios simultáneamente
-// 4. Reportar si hubo cambios
+// 3. Guardar el estado previsto
+// 4. Actualizar el estado al final de la iteración
+// 5. Reportar si hubo cambios
 ```
 
 #### 2. **Celda.java** - Unidad Atómica
-- **Responsabilidad**: Representar una celda individual y su evolución
+- **Responsabilidad**: Representar una celda individual y su evolución.
 - **Métodos clave**:
-  - `calcularSig(int vecinosVivos)`: Delega a Estado para calcular siguiente
-  - `evolucionar()`: Transiciona al siguiente estado
-  - `isViva()`: Consulta si la celda está viva
+  - `calcularSig(int vecinosVivos)`: Delega a `Estado` para calcular el siguiente estado.
+  - `evolucionar()`: Transiciona al siguiente estado.
+  - `isViva()`: Consulta si la celda está viva.
 
-**Patrón**: Actúa como contexto en el patrón State
+**Patrón**: Actúa como contexto en el patrón State.
 
 #### 3. **Estado.java (Interfaz)** - Patrón Strategy
-- **Responsabilidad**: Definir el contrato para comportamientos de estado
+- **Responsabilidad**: Definir el contrato para comportamientos de estado.
 - **Métodos**:
   - `boolean isViva()`: ¿Es una celda viva?
   - `char getRepresentacion()`: Símbolo visual
   - `Estado SigEstado(int vecinosVivos)`: Calcula transición
 
-**Ventaja**: Nueva lógica sin modificar `Celda` o `Tablero`
+**Ventaja**: Nueva lógica sin modificar `Celda` o `Tablero`.
 
 #### 4. **Implementaciones de Estado**
 
 **EstadoVivo.java**
-- Muere si tiene < 2 o > 3 vecinos vivos
-- Probabilidad de enfermarse: 25%
+- Muere si tiene < 2 o > 3 vecinos vivos.
+- Con 2 o 3 vecinos vive y puede enfermarse con probabilidad 25%.
 - Representación: `O`
 
 **EstadoMuerto.java**
-- Se vuelve viva con exactamente 3 vecinos vivos (reproducción)
-- Permanece muerta en cualquier otro caso
+- Se vuelve viva con exactamente 3 vecinos vivos.
+- Permanece muerta en cualquier otro caso.
 - Representación: `.`
 
 **EstadoEnfermo.java**
-- Se considera viva
-- Muere en la siguiente generación
-- Estado transitorio para agregar dinámica
+- Se considera viva.
+- En la siguiente generación muere automáticamente.
 - Representación: `E`
 
 **EstadoLatente.java**
-- Se considera muerta
-- Despierta con exactamente 1 vecino vivo
-- Simula períodos de letargo
+- Se considera muerta.
+- Despierta con exactamente 1 vecino vivo.
 - Representación: `X`
 
 #### 5. **VistaJuego.java** - Interfaz de Usuario
-- **Responsabilidad**: Orquestar la interacción con el usuario
+- **Responsabilidad**: Orquestar la interacción gráfica con Swing.
 - **Métodos clave**:
-  - `iniciar()`: Menú principal
-  - `configurarArchivo()`: Carga desde archivo
-  - `configurarManual()`: Generación aleatoria
-  - `bucleDeEjecucion()`: Loop principal de simulación
-  - `leerEntero()`: Validación de entrada
+  - `iniciar()`: Hace visible la ventana principal.
+  - `cargarDesdeArchivo()`: Abre un selector de archivo.
+  - `configurarManual()`: Genera un tablero aleatorio.
+  - `iniciarBucle()`: Ejecuta la simulación con `Timer`.
+  - `avanzarUnaGeneracion()`: Avanza una generación manual.
 
-**Flujo**:
+**Flujo actual**:
 ```
-1. Mostrar menú
-2. Usuario elige carga de archivo o aleatorio
-3. Se crea Tablero
-4. Loop: mostrar → avanzar → esperar
+1. Mostrar ventana Swing
+2. Usuario elige cargar archivo o generar aleatorio
+3. Se crea el Tablero
+4. Se renderiza el estado visual
+5. Se avanza por pasos o con Timer
 ```
 
 #### 6. **CargadorTablero.java** - Entrada/Salida
-- **Responsabilidad**: Parsear archivos de configuración
+- **Responsabilidad**: Parsear archivos de configuración.
 - **Métodos clave**:
-  - `cargarDesdeArchivo(String ruta)`: Carga tablero desde archivo
-  - `crearEstadoSegunCaracter(char c)`: Mapeo de caracteres a estados
+  - `cargarDesdeArchivo(String ruta)`: Carga un tablero desde archivo.
+  - `crearEstadoSegunCaracter(char c)`: Mapeo de caracteres a estados.
 
 **Validaciones**:
-- Verifica filas y columnas
-- Maneja archivos con líneas cortas (completa con muertos)
-- Lanza excepciones descriptivas
+- Verifica filas y columnas.
+- Completa líneas cortas con celdas muertas.
+- Lanza excepciones descriptivas.
 
 ---
 
@@ -303,11 +303,7 @@ public interface Estado {
 - El Modelo es independiente de la configuración inicial.
 
 ```java
-// Correcto (DIP):
 private Estado estadoActual;  // Depende de abstracción
-
-// Incorrecto (sin DIP):
-private EstadoVivo estadoActual;  // Depende de implementación
 ```
 
 ---
@@ -361,11 +357,32 @@ private static Estado crearEstadoSegunCaracter(char c) {
         case 'O' -> new EstadoVivo();
         case 'E' -> new EstadoEnfermo();
         case 'X' -> new EstadoLatente();
-        case 'R' -> new EstadoRoboto();      // ← NUEVA LÍNEA
+        case 'R' -> new EstadoRoboto();    // ← NUEVA LÍNEA
         case '.' -> new EstadoMuerto();
         default  -> new EstadoMuerto();
     };
 }
+```
+#### Paso 3: Actualizar la Vista
+
+Modifica `VistaJuego.java` en el método `colorPorEstado()`:
+
+```java
+private Color colorPorEstado(char estado) {
+    switch (estado) {
+        case 'O':
+            return new Color(0, 128, 0);
+        case 'E':
+            return new Color(255, 215, 0);
+        case 'X':
+            return new Color(173, 216, 230);
+        case 'R':
+            return new Color(255, 0, 0);       // ← NUEVA LÍNEA
+        default:
+            return Color(0, 0, 0);
+    }
+}
+
 ```
 
 ---
@@ -379,5 +396,5 @@ private static Estado crearEstadoSegunCaracter(char c) {
 
 ---
 
-**Última actualización**: Abril 2026
+**Última actualización**: Julio 2026
 
