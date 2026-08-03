@@ -4,12 +4,11 @@ Este proyecto se crea a partir de la consigna del TPE Libre - Juego de la vida (
 
 ## Índice
 1. [Estructura del Proyecto](#estructura-del-proyecto)
-2. [Requisitos](#requisitos)
-3. [Compilación](#compilación)
-4. [Ejecución](#ejecución)
-5. [Arquitectura y Diseño](#arquitectura-y-diseño)
-6. [Principios SOLID](#principios-solid-aplicados)
-7. [Cómo Extender el Proyecto](#cómo-extender-el-proyecto)
+2. [Compilación](#compilación)
+3. [Ejecución](#ejecución)
+4. [Arquitectura y Diseño](#arquitectura-y-diseño)
+5. [Principios SOLID](#principios-solid-aplicados)
+6. [Cómo Extender el Proyecto](#cómo-extender-el-proyecto)
 
 ---
 
