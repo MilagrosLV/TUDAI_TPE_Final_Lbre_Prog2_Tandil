@@ -5,8 +5,9 @@
  * 
  */
 module JuegoDeLaVida {
-    // Si usas JavaFX o Swing en el futuro, deberás agregar 'requires' aquí.
+    requires java.desktop;
     exports juego;
     exports modelo;
+    exports vista;
 
 }
