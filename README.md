@@ -4,12 +4,11 @@ Este proyecto se crea a partir de la consigna del TPE Libre - Juego de la vida (
 
 ## Índice
 1. [Estructura del Proyecto](#estructura-del-proyecto)
-2. [Requisitos](#requisitos)
-3. [Compilación](#compilación)
-4. [Ejecución](#ejecución)
-5. [Arquitectura y Diseño](#arquitectura-y-diseño)
-6. [Principios SOLID](#principios-solid-aplicados)
-7. [Cómo Extender el Proyecto](#cómo-extender-el-proyecto)
+2. [Compilación](#compilación)
+3. [Ejecución](#ejecución)
+4. [Arquitectura y Diseño](#arquitectura-y-diseño)
+5. [Principios SOLID](#principios-solid-aplicados)
+6. [Cómo Extender el Proyecto](#cómo-extender-el-proyecto)
 
 ---
 
@@ -44,30 +43,14 @@ JuegoDeLaVida/
 
 ---
 
-## Requisitos
-
-- **Java**: JDK 11 o superior
-- **Sistema Operativo**: Windows, macOS, Linux
-- **Compilador**: `javac` (incluido en JDK)
-
----
-
 ## Compilación
 
-### Opción 1: Compilación Manual desde Línea de Comandos
+### Desde Línea de Comandos
 
 ```bash
 cd JuegoDeLaVida
 javac -d bin src/modelo/*.java src/juego/*.java src/vista/*.java src/io/*.java
 ```
-
-### Opción 2: Usando IDE (IntelliJ IDEA, Eclipse, etc.)
-
-1. Abre el proyecto en tu IDE
-2. Marca la carpeta `src` como source folder
-3. Ejecuta la opción "Build Project"
-
----
 
 ## Ejecución
 
@@ -312,10 +295,10 @@ private Estado estadoActual;  // Depende de abstracción
 
 ### Escenario 1: Agregar un Nuevo Estado
 
-Supongamos que quieres agregar un estado `EstadoRoboto` que:
+Supongamos que se quiere agregar un estado `EstadoRoboto`:
 - Es considerado "vivo"
 - Se representa con `R`
-- Muere si tiene más de 4 vecinos vivos (resiste mejor que vivo)
+- Muere si tiene más de 4 vecinos vivos.
 
 #### Paso 1: Crear la Nueva Clase de Estado
 
