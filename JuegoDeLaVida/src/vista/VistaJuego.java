@@ -87,14 +87,15 @@ public class VistaJuego extends JFrame {
         delayField.setText("500");
 
         //Creo los botones
-        JButton botonArchivo = new JButton("Cargar desde archivo");
-        JButton botonAleatorio = new JButton("Generar aleatorio");
-        JButton botonIniciar = new JButton("Iniciar simulación");
-        JButton botonPaso = new JButton("Siguiente paso");
+        JButton botonArchivo = new JButton("Cargar tablero desde archivo");
+        JButton botonAleatorio = new JButton("Generar tablero aleatorio");
+        JButton botonIniciar = new JButton("Iniciar");
+        JButton botonPaso = new JButton("Siguiente");
         botonPausarReanudar = new JButton("Pausar");
 
 
         //Agrego los compoinentes creados al Panel Configuracion
+        panelConfiguracion.add(botonArchivo);
         panelConfiguracion.add(new JLabel("Filas:"));
         panelConfiguracion.add(filasField);
         panelConfiguracion.add(new JLabel("Columnas:"));
@@ -103,11 +104,10 @@ public class VistaJuego extends JFrame {
         panelConfiguracion.add(generacionesField);
         panelConfiguracion.add(new JLabel("Delay (ms):"));
         panelConfiguracion.add(delayField);
-        panelConfiguracion.add(botonArchivo);
         panelConfiguracion.add(botonAleatorio);
         panelConfiguracion.add(botonIniciar);
-        panelConfiguracion.add(botonPaso);
         panelConfiguracion.add(botonPausarReanudar);
+        panelConfiguracion.add(botonPaso);
 
 
     //Panel Tablero y su layout
