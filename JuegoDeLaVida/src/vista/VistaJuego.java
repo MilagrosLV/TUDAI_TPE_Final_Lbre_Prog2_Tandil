@@ -144,7 +144,8 @@ public class VistaJuego extends JFrame {
     private void cargarDesdeArchivo() {
         //Con JFileChooser puedo buscar y seleccionar un archivo
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("ejemplos"));
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos de texto (*.txt)", "txt"));
+        chooser.setCurrentDirectory(new File("ejemplos"));//Carpeta por defecto
         int resultado = chooser.showOpenDialog(this);
 
         if (resultado == JFileChooser.APPROVE_OPTION) {
