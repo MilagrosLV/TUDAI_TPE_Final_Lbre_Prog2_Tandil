@@ -344,15 +344,13 @@ public class VistaJuego extends JFrame {
 
     //Colores de las celdas seguún su valor
     private Color colorPorEstado(char estado) {
-        switch (estado) {
-            case 'O':
-                return new Color(0, 128, 0); // Verde
-            case 'E':
-                return new Color(255, 215, 0); // Amarillo
-            case 'X':
-                return new Color(173, 216, 230); // Azul claro
-            default:
-                return new Color(0, 0, 0);
-        }
+        return switch (estado) {
+            case 'O' -> new Color(0, 128, 0);
+            case 'E' -> new Color(255, 215, 0);
+            case 'X' -> new Color(173, 216, 230);
+            default -> new Color(0, 0, 0);
+        }; // Verde
+        // Amarillo
+        // Azul claro
     }
 }
