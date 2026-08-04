@@ -28,9 +28,7 @@ import modelo.EstadoVivo;
 import modelo.Tablero;
 
 public class VistaJuego extends JFrame {
-
-    private static final long serialVersionUID = 1L;
-
+	
 //ATRIBUTOS
     private Tablero tablero;
     private JPanel panelTablero;
@@ -246,7 +244,7 @@ public class VistaJuego extends JFrame {
 
             if (maxGeneraciones > 0 && generacionActual >= maxGeneraciones) {
                 detenerSimulacion();
-                estadoLabel.setText("Simulación finalizada: límite de generaciones alcanzado.");
+                estadoLabel.setText("Simulación FINALIZADA: límite de generaciones alcanzado.");
                 return;
             }
 
@@ -254,7 +252,7 @@ public class VistaJuego extends JFrame {
             if (!huboCambios) {
                 detenerSimulacion();
                 botonPausarReanudar.setText("Pausar");
-                estadoLabel.setText("Simulación finalizada: el tablero se estabilizó.");
+                estadoLabel.setText("Simulación FINALIZADA: el tablero se estabilizó.");
                 return;
             }
 
@@ -345,12 +343,10 @@ public class VistaJuego extends JFrame {
     //Colores de las celdas seguún su valor
     private Color colorPorEstado(char estado) {
         return switch (estado) {
-            case 'O' -> new Color(0, 128, 0);
-            case 'E' -> new Color(255, 215, 0);
-            case 'X' -> new Color(173, 216, 230);
-            default -> new Color(0, 0, 0);
-        }; // Verde
-        // Amarillo
-        // Azul claro
+            case 'O' -> new Color(0, 128, 0); //Verde
+            case 'E' -> new Color(255, 215, 0); //Amarillo
+            case 'X' -> new Color(173, 216, 230); //Azul claro
+            default -> new Color(0, 0, 0);//Negro
+        }; 
     }
 }
